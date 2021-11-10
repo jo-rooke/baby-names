@@ -1,20 +1,20 @@
 .fButton {
-  background-color: " #ffdb99";
-  color: "#b35900";
-  border: "2px";
-  margin: "3px";
-  border: "2px";
-  border-radius: "8px";
-  margin: "3px";
+  background-color: #ffdb99;
+  color: #b35900;
+  border: 2px;
+  margin: 3px;
+  border: 2px;
+  border-radius: 8px;
+  margin: 3px;
 }
 .mButton {
-  background-color: " #e0ccff";
-  color: "#5c00e6";
-  border: "2px";
-  margin: "3px";
-  border: "2px";
-  border-radius: "8px";
-  margin: "3px";
+  background-color: #e0ccff;
+  color: #5c00e6;
+  border: 2px;
+  margin: 3px;
+  border: 2px;
+  border-radius: 8px;
+  margin: 3px;
 }
 
 .body {
