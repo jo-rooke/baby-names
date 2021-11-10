@@ -16,6 +16,12 @@ export default function Name(props: NameProps): JSX.Element {
   };
 
   return (
-    <button style={props.sex === "m" ? mStyle : fStyle}>{props.name}</button>
+    <>
+      {props.sex === "m" ? (
+        <button className="mButton">{props.name}</button>
+      ) : (
+        <button className="fButton">{props.name}</button>
+      )}
+    </>
   );
 }
