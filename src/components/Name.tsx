@@ -1,39 +1,21 @@
-import { NameProps } from "../NameProps";
+import SpecificProps from "../SpecificProps";
 import "./stylesheet.css";
 
-interface SpecificProps {
-  id: number;
-  name: string;
-  sex: string;
-  favNames: NameProps[];
-  setFavNames: (favNames: NameProps[]) => void;
-}
-
 export default function Name(props: SpecificProps): JSX.Element {
+  const handleButtonClick = (props: SpecificProps) => {
+    props.setFavNames([
+      ...props.favNames,
+      { id: props.id, name: props.name, sex: props.sex },
+    ]);
+  };
   return (
     <>
       {props.sex === "m" ? (
-        <button
-          className="mButton"
-          onClick={() =>
-            props.setFavNames([
-              ...props.favNames,
-              { id: props.id, name: props.name, sex: props.sex },
-            ])
-          }
-        >
+        <button className="mButton" onClick={() => handleButtonClick(props)}>
           {props.name}
         </button>
       ) : (
-        <button
-          className="fButton"
-          onClick={() =>
-            props.setFavNames([
-              ...props.favNames,
-              { id: props.id, name: props.name, sex: props.sex },
-            ])
-          }
-        >
+        <button className="fButton" onClick={() => handleButtonClick(props)}>
           {props.name}
         </button>
       )}

@@ -1,17 +1,32 @@
 import Name from "./Name";
 import names from "../names.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NameProps } from "../NameProps";
 import FavName from "./FavouriteName";
 
 export default function MainContent(): JSX.Element {
   const [searchTerm, setSearchTerm] = useState("");
   const [favNames, setFavNames] = useState<NameProps[]>([]);
-  const sortedNames = names.sort((a, b) => (a.name < b.name ? -1 : 1));
+  const [baseNames, setBaseNames] = useState<NameProps[]>(names);
+  const sortedNames = baseNames.sort((a, b) => (a.name < b.name ? -1 : 1));
 
-  const filteredNames: NameProps[] = sortedNames.filter((name) => {
+  function handleFilterNames(baseNames: NameProps[]) {
+    for (const name of baseNames) {
+      const index = baseNames.indexOf(name);
+      if (favNames.includes(name)) {
+        baseNames = baseNames.splice(index, 1);
+      }
+    }
+    return baseNames;
+  }
+
+  const filteredNames = sortedNames.filter((name) => {
     return name.name.toLowerCase().includes(searchTerm.toLowerCase());
   });
+
+  useEffect(() => {
+    setBaseNames(handleFilterNames(baseNames));
+  }, [favNames, baseNames]);
 
   return (
     <>
@@ -20,7 +35,7 @@ export default function MainContent(): JSX.Element {
         placeholder="Search for a name..."
       />
       <br></br>
-      Your favourite names:
+      <h2>Your favourite names:</h2>
       <div className="favNames">
         {favNames.map((eachFavName) => (
           <FavName
