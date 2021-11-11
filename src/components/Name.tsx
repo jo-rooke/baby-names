@@ -18,12 +18,7 @@ export default function Name(props: SpecificProps): JSX.Element {
         <button
           className="mButton"
           onClick={() => {
-            hideFavs(
-              props.id,
-              props.baseNames,
-              props.favNames,
-              props.setBaseNames
-            );
+            hideFavs(props.id, props.baseNames, props.setBaseNames);
             props.setFavNames([
               ...props.favNames,
               { id: props.id, name: props.name, sex: props.sex },
@@ -36,12 +31,7 @@ export default function Name(props: SpecificProps): JSX.Element {
         <button
           className="fButton"
           onClick={() => {
-            hideFavs(
-              props.id,
-              props.baseNames,
-              props.favNames,
-              props.setBaseNames
-            );
+            hideFavs(props.id, props.baseNames, props.setBaseNames);
             props.setFavNames([
               ...props.favNames,
               { id: props.id, name: props.name, sex: props.sex },
@@ -58,11 +48,8 @@ export default function Name(props: SpecificProps): JSX.Element {
 export function hideFavs(
   nameToRemove: number,
   baseNames: NameProps[],
-  favNames: NameProps[],
   setBaseNames: (name: NameProps[]) => void
 ): void {
-  console.log(nameToRemove);
-  console.log(baseNames);
   const favHidden = baseNames.filter((name) => name.id !== nameToRemove);
 
   setBaseNames(favHidden);

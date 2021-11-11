@@ -32,6 +32,10 @@ export default function FavName(props: SpecificProps): JSX.Element {
           className="fButton"
           onClick={() => {
             removeFavourites(props.name, props.favNames, props.setFavNames);
+            props.setBaseNames([
+              ...props.baseNames,
+              { id: props.id, name: props.name, sex: props.sex },
+            ]);
           }}
         >
           {props.name}
