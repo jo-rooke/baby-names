@@ -1,15 +1,31 @@
 import Name from "./Name";
 import names from "../names.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NameProps } from "../NameProps";
 import FavName from "./FavouriteName";
 
 export default function MainContent(): JSX.Element {
   const [searchTerm, setSearchTerm] = useState("");
   const [favNames, setFavNames] = useState<NameProps[]>([]);
-  const sortedNames = names.sort((a, b) => (a.name < b.name ? -1 : 1));
+  const [baseNames, setBaseNames] = useState<NameProps[]>(names);
 
-  const filteredNames: NameProps[] = sortedNames.filter((name) => {
+  useEffect(() => {
+    handleRemoveFavs(baseNames);
+  }, [favNames, baseNames]);
+
+  function handleRemoveFavs(baseNames: NameProps[]) {
+    for (const name of baseNames) {
+      const index = baseNames.indexOf(name);
+      if (favNames.indexOf(name) > -1) {
+        setBaseNames(baseNames.splice(index, 1));
+      }
+    }
+    return baseNames;
+  }
+
+  const sortedNames = baseNames.sort((a, b) => (a.name < b.name ? -1 : 1));
+
+  const filteredNames = sortedNames.filter((name) => {
     return name.name.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
