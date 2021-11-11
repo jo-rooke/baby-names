@@ -1,6 +1,6 @@
 import Name from "./Name";
 import names from "../names.json";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NameProps } from "../NameProps";
 import FavName from "./FavouriteName";
 
