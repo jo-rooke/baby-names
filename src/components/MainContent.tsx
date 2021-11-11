@@ -9,25 +9,28 @@ export default function MainContent(): JSX.Element {
   const [favNames, setFavNames] = useState<NameProps[]>([]);
   const [baseNames, setBaseNames] = useState<NameProps[]>(names);
 
-  useEffect(() => {
-    handleRemoveFavs(baseNames);
-  }, [favNames, baseNames]);
+  // useEffect(() => {
+  //   handleRemoveFavs(baseNames);
+  // }, [favNames, baseNames]);
 
-  function handleRemoveFavs(baseNames: NameProps[]) {
-    for (const name of baseNames) {
-      const index = baseNames.indexOf(name);
-      if (favNames.indexOf(name) > -1) {
-        setBaseNames(baseNames.splice(index, 1));
-      }
-    }
-    return baseNames;
-  }
+  // function handleRemoveFavs(baseNames: NameProps[]) {
+  //   for (const name of baseNames) {
+  //     const index = baseNames.indexOf(name);
+  //     if (favNames.indexOf(name) > -1) {
+  //       setBaseNames(baseNames.splice(index, 1));
+  //     }
+  //   }
+  //   console.log(baseNames);
+  //   return baseNames;
+  // }
 
   const sortedNames = baseNames.sort((a, b) => (a.name < b.name ? -1 : 1));
 
   const filteredNames = sortedNames.filter((name) => {
     return name.name.toLowerCase().includes(searchTerm.toLowerCase());
   });
+
+  console.log(baseNames);
 
   return (
     <>
@@ -46,6 +49,8 @@ export default function MainContent(): JSX.Element {
             sex={eachFavName.sex}
             favNames={favNames}
             setFavNames={setFavNames}
+            baseNames={baseNames}
+            setBaseNames={setBaseNames}
           />
         ))}
       </div>
@@ -59,7 +64,9 @@ export default function MainContent(): JSX.Element {
             name={eachName.name}
             sex={eachName.sex}
             favNames={favNames}
+            baseNames={baseNames}
             setFavNames={setFavNames}
+            setBaseNames={setBaseNames}
           />
         ))}
       </div>
